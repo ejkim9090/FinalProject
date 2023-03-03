@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\_1workspace\java\20230213_myWeb"/>
+			<item value="C:\_1workspace\java\20230203_myWeb"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\static_web02"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\static_web01"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\mybatis_sample01"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo12"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo11"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo10"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo09"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo08"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo07"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo06"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo05"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo04"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\Java_demo03"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\java_demo02"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\external_sql00"/>
+			<item value="C:\Users\Luminite\git\stunning-fiesta\dynamic_web01"/>
+		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item key="BUILD_NOW" value="true"/>
+		<item key="BUILD_ALL" value="true"/>
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="666"/>
+		<item key="DIALOG_HEIGHT" value="597"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jst.servlet.ui.project.facet.WebProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.wst.web.ui"/>
+		</list>
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\workspace\github_desktop\20230214_myWeb"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
+		<item key="ShowStatusLine" value="true"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/20230214_myWeb/src/kh/home/controller/HomeController.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/Servers/Tomcat v9.0 Server at localhost-config/web.xml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
+		<item key="ShowDerived" value="false"/>
+		<item key="FilterByLocation" value="false"/>
+		<item key="WorkingSet" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;"/>
+		<section name="DialogBoundsSettings">
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_WIDTH" value="600"/>
+			<item key="DIALOG_X_ORIGIN" value="1151"/>
+			<item key="DIALOG_Y_ORIGIN" value="548"/>
+			<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+		</section>
+	</section>
+</section>

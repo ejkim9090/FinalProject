@@ -1,0 +1,24 @@
+package kh.spring.s02.model.service;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import kh.spring.s02.model.vo.BoardVo;
+
+public interface BoardService {
+	public int insert(BoardVo vo);
+	public int update(BoardVo vo);
+//	public int updateReadCount(int boardNum);
+//	public int updateForReply(int boardNum);
+	public int delete(int boardnum /* BoardVo vo 또는 PK 또는 List<PK>*/);
+	public BoardVo selectOne(int boardnum, String writer /* PK */);
+	public List<BoardVo> selectList(); // 전체읽기
+	public List<BoardVo> selectList(int currPage, int limit); //페이징 처리하여 읽기
+	
+/*	public List<BoardVo> selectList2() {
+ *		return sqlSession.selectList("boardns.selectListid2");
+ *	}
+ */
+	public int selectOneCount();
+}

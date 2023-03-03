@@ -1,0 +1,18 @@
+package kr.common.comment.service;
+
+import java.sql.Connection;
+
+import kr.common.comment.dao.CommentDao;
+import kr.common.comment.vo.CommentVo;
+import static kr.common.jdbc.JDBCTemplate.*;
+
+public class CommentService {
+	public CommentVo getBoardComment(int boardId, CommentVo vo) {
+		CommentVo result = null;
+		Connection con = getConnection();
+		
+		result = new CommentDao().getBoardComment(boardId, vo, con);
+		
+		return result;
+	}
+}

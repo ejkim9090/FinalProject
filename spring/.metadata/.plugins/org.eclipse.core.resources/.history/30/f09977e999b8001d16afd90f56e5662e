@@ -1,0 +1,134 @@
+package kh.spring.s02.model.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import kh.spring.s02.model.service.BoardService;
+import kh.spring.s02.model.vo.BoardVo;
+
+@Controller
+@RequestMapping("/board")
+public class BoardController {
+	@Autowired
+	private BoardService service;
+	
+	//@RequestMapping(value="/update", method=RequestMethod.GET)
+	@GetMapping("/update")
+	public void viewUpdateBoard(Model model) {
+		
+	}
+	
+	//@PostMapping("/update")
+	@GetMapping("/updatePostTest")
+	public void updateBoard(Model model) {
+		//TODO
+		int boardNum = 1;
+		String title = "수정 제목";
+		String content = "수정 내용";
+		String boardOriginalFilename = ""; // "" 파일이 없음
+		String boardRenameFilename = ""; // "" 파일이 없음
+		
+		BoardVo vo = new BoardVo();
+		vo.setBoardTitle(title);
+		vo.setBoardContent(content);
+		vo.setBoardNum(boardNum);
+		vo.setBoardOriginalFilename(boardOriginalFilename);
+		vo.setBoardRenameFilename(boardRenameFilename);
+		
+		service.update(vo);
+		
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public void viewDeleteBoard() {
+		//TODO
+		int boardNum=10;
+		int result = service.delete(boardNum);
+		
+	}
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public ModelAndView viewlist(ModelAndView mv) {
+		System.out.println("ㅎㅇ");
+		mv.addObject("boardlist", service.selectList());
+		mv.setViewName("board/list");
+		return mv;
+	}
+	
+	@GetMapping("/read")
+	public void viewReadBoard() {
+		//TODO
+		int boardNum = 1;
+		String writer = "user22";
+		BoardVo vo = service.selectOne(boardNum, writer);
+	}
+	
+	@GetMapping("/boardinsert")
+	public ModelAndView viewinsertBoard(
+			ModelAndView mv
+			, HttpServletRequest req
+			, HttpSession session
+			, BoardVo vo
+			) {
+		
+		mv.setViewName("board/insert");
+		return mv;
+	}
+	
+	//원글작성
+//	@PostMapping("/insert")
+	//TODO
+	@GetMapping("/insertPostTest")
+	public ModelAndView doInsertBoard(ModelAndView mv
+			, BoardVo vo
+			) {
+		vo.setBoardContent("임시12내용");
+		vo.setBoardTitle("임시12제목");
+		vo.setBoardWriter("user22");
+		int result = service.insert(vo);
+		
+		return mv;
+	}
+	
+	//답글작성 페이지 이동
+		@GetMapping("/insertReply")
+		public ModelAndView viewInsertReply(ModelAndView mv
+				, int boardNum //몇번글에 답글인지?
+				) {
+			
+			
+			return mv;
+		}
+	
+	//답글작성
+//	@PostMapping("/insertReply")
+	@GetMapping("/insertReplyPostTest")
+	public ModelAndView viewInsertReply(ModelAndView mv
+			, BoardVo vo
+			) {
+		int boardNum = 7;
+		vo.setBoardNum(boardNum);
+		
+		vo.setBoardContent("임시7답글내용");
+		vo.setBoardTitle("임시7답글제목");
+		vo.setBoardWriter("user22");
+		
+		service.insert(vo);
+		
+		return mv;
+	}
+	
+	@PostMapping("/boardinsert")
+	public ModelAndView doinsertBoard(ModelAndView mv) {
+		
+		return mv;
+	}
+}

@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<section>
+	<h1>자유게시판</h1>
+	<table>
+		<tr>
+			<td>게시글번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td>조회수</td>
+		</tr>
+		<c:forEach items="${boardlist }" var="vo" varStatus="s">
+			<tr>
+				<td>${vo.board_id }</td>
+				<td>${vo.title }</td>
+				<td>${vo.board_user }</td>
+				<td>${vo.summit_date }</td>
+				<td>${vo.read_count }</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<div>
+		<c:if test="${startPageNum > 1 }">
+			<span>이전</span>
+		</c:if>
+		<c:forEach begin="${startPageNum }" end="${endPageNum }" step="1" var="page">
+			<c:choose>
+				<c:when test="${page == currentPage }">
+					<span><b>${page }</b></span>
+				</c:when>
+				<c:otherwise>
+					<span><a href="<%=request.getContextPath() %>/?pg=${page}">${page }</a></span>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endPageNum < pageCnt }">
+			<span>이전</span>
+		</c:if>
+	</div>
+</section>

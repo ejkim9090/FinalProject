@@ -1,0 +1,65 @@
+package kh.spring.s02.model.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import kh.spring.s02.member.model.service.MemberService;
+import kh.spring.s02.member.model.vo.MemberVo;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+	@Autowired
+	private MemberService service;
+	
+	@GetMapping("/signUp")
+	public ModelAndView viewInsert(ModelAndView mv) {
+		
+		return mv;
+	}
+//	@PostMapping("/signUp")
+	//TODO
+	@GetMapping("/testSignup")
+	public ModelAndView insert(ModelAndView mv, MemberVo vo) {
+		vo.setEmail("email");
+		vo.setId("id");
+		vo.setName("name");
+		vo.setPasswd("passwd");
+		
+		int result = service.insert(vo);
+		//TODO
+		
+		return mv;
+	}
+	
+	public ModelAndView viewUpdate(MemberVo vo) {
+		return mv;
+	}
+	@GetMapping("/update")
+	public ModelAndView update(ModelAndView mv, MemberVo vo) {
+		vo.setEmail("user33@example.com");
+		vo.setPasswd("user33");
+		vo.setId("user3");
+		
+		service.update(vo);
+		return mv;
+	}
+	
+	public ModelAndView delete(ModelAndView mv, String id) {
+		return mv;
+		
+	}
+	
+	public ModelAndView selectOne(ModelAndView mv, String id) {
+		return mv;
+	}
+	
+	public ModelAndView selectList() {
+		return mv;
+	}
+}
