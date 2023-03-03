@@ -1,5 +1,0 @@
-package kh.spring.s02.member.model.service;
-
-public class MemberServiceImpl {
-
-}
