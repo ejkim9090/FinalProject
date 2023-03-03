@@ -6,9 +6,11 @@
 	 	<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 
+		<!-- 
 	<typeAliases>
 		<typeAlias type="kh.spring.s01.board.model.vo.BoardVo" alias="BoardVo"/>
 	</typeAliases>
+		 -->
 	
 	<mappers>
 		
