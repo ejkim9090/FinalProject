@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.w3c.dom.Document;
@@ -35,6 +36,12 @@ import org.xml.sax.InputSource;
  */
 @Controller
 public class HomeController {
+	
+	//예외처리 메서드
+//	@ExceptionHandler(Exception.class)
+//	public String catcher(Exception ex) {
+//		return "errorPage";
+//	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
