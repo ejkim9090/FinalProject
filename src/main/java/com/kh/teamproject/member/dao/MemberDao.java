@@ -14,7 +14,7 @@ public class MemberDao {
 	private SqlSession sqlSession;
 
 	public int insert(MemberVo vo) throws Exception{		
-		return sqlSession.insert("memberMapper.insert",vo);
+		return sqlSession.insert("memberMapper.insertId",vo);
 	}
 	
 	public int update(MemberVo vo) throws Exception {

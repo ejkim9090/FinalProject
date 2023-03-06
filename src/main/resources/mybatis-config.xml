@@ -5,15 +5,14 @@
 	 	<setting name="mapUnderscoreToCamelCase" value="true"/>
 	 	<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-
-		<!-- 
+ 
 	<typeAliases>
-		<typeAlias type="kh.spring.s01.board.model.vo.BoardVo" alias="BoardVo"/>
+		<!-- <typeAlias type="kh.spring.s01.board.model.vo.BoardVo" alias="BoardVo"/> -->
+		<typeAlias type="com.kh.teamproject.member.vo.MemberVo" alias="mvo"/>
 	</typeAliases>
-		 -->
 	
 	<mappers>
-		
+		<mapper resource="mappers/member-mapper.xml"/>
 	</mappers>
 	
 </configuration>
