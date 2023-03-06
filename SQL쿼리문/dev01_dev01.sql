@@ -1,3 +1,4 @@
+--<<사용자 테이블>>--
 --이용자 테이블 삭제
 drop table usersTable;
 
@@ -39,7 +40,7 @@ update USERSTABLE set username='&name', USERNICKNAME='&nickname', EMAIL='&email'
 
 
 
-
+--<<게시판 게시글>>--
 --게시글 테이블
 CREATE TABLE POSTTABLE(
        POSTID NUMBER PRIMARY KEY NOT NULL
@@ -79,5 +80,14 @@ CREATE TABLE HTGTABLE(
     , CONSTRAINT PK_HTG PRIMARY KEY(HASHTAG, POSTID)
 );
 
+--<<좋아요 테이블>>--
+create table likeTable(
+        LIKEID Number primary key
+      , POSTID number
+      , USERID VARCHAR2(20)
+      , CONSTRAINT FK_POSTID FOREIGN KEY(POSTID) REFERENCES POSTTABLE(POSTID)
+      , CONSTRAINT FK_USERID FOREIGN KEY(USERID) REFERENCES usersTable(userid)
+);
 
+select * from likeTable;
 
