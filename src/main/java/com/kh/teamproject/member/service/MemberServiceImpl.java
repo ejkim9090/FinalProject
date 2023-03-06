@@ -3,11 +3,12 @@ package com.kh.teamproject.member.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.teamproject.member.dao.MemberDao;
 import com.kh.teamproject.member.vo.MemberVo;
 
-
+@Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDao dao;
