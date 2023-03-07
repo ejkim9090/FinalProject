@@ -81,12 +81,15 @@ CREATE TABLE HTGTABLE(
 );
 
 --<<좋아요 테이블>>--
+drop table likeTable;
+
 create table likeTable(
-        LIKEID Number primary key
-      , POSTID number
+        LIKEID Number 
+      , POSTID Number 
       , USERID VARCHAR2(20)
       , CONSTRAINT FK_POSTID FOREIGN KEY(POSTID) REFERENCES POSTTABLE(POSTID)
       , CONSTRAINT FK_USERID FOREIGN KEY(USERID) REFERENCES usersTable(userid)
+      , CONSTRAINT PK_LIKETABLE PRIMARY KEY(POSTID, USERID)
 );
 
 select * from likeTable;
