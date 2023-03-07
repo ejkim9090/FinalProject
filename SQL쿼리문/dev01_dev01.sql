@@ -5,9 +5,9 @@ drop table usersTable;
 --이용자 테이블 생성
 create table usersTable(
             usernum number NOT NULL
-          , userid VARCHAR2(20)
-          , username VARCHAR2(20)
-          , usernickname VARCHAR2(45) unique
+          , userid VARCHAR2(20 char)
+          , username VARCHAR2(20 char)
+          , usernickname VARCHAR2(15 char) unique
           , email VARCHAR2(100)
           , password VARCHAR2(30)
           , create_at DATE DEFAULT SYSDATE
@@ -53,6 +53,13 @@ CREATE TABLE POSTTABLE(
      , CONSTRAINT FK_USERID_POST FOREIGN KEY(userid) REFERENCES usersTable(userid)
 );
 
+--게시글 리스트 조회
+
+--게시글 작성
+
+--게시글 삭제
+
+--게시글 수정
 
 --재료 테이블
 CREATE TABLE INGTABLE(
@@ -86,7 +93,7 @@ drop table likeTable;
 create table likeTable(
         LIKEID Number 
       , POSTID Number 
-      , USERID VARCHAR2(20)
+      , USERID VARCHAR2(20 char)
       , CONSTRAINT FK_POSTID FOREIGN KEY(POSTID) REFERENCES POSTTABLE(POSTID)
       , CONSTRAINT FK_USERID FOREIGN KEY(USERID) REFERENCES usersTable(userid)
       , CONSTRAINT PK_LIKETABLE PRIMARY KEY(POSTID, USERID)
@@ -94,3 +101,23 @@ create table likeTable(
 
 select * from likeTable;
 
+
+--<<댓글 테이블>>--
+create table commentTable(
+        id number not null primary key
+      , userid VARCHAR2(20 char) not null
+      , postid number not null
+      , commentcontent VARCHAR2(4000) not null
+      , create_at date default sysdate not null
+      , updated_at date
+      , constraint FK_userid_commentTable Foreign Key (userid) references usersTable (userid)
+      , constraint FK_postid_commentTable Foreign Key (postid) references postTable (postid)
+);
+--댓글 조회
+select * from commentTable;
+
+--댓글 작성
+
+--댓글 수정
+
+--댓글 삭제
