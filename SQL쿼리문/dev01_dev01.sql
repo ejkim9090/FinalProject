@@ -44,7 +44,6 @@ update USERSTABLE set username='&name', USERNICKNAME='&nickname', EMAIL='&email'
 --게시글 테이블
 CREATE TABLE POSTTABLE(
        POSTID NUMBER PRIMARY KEY NOT NULL
-     , POSTNAME VARCHAR2(50 char) NOT NULL
      , userid VARCHAR2(20 char) NOT NULL                        
      , username VARCHAR2(20 char) NOT NULL			        
      , FOODNAME VARCHAR2(50 char) NOT NULL
