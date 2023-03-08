@@ -6,6 +6,11 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,8 +39,12 @@ public class TempForTable {
 		
 		URL url=null;
 		BufferedReader br = null;
-		String result = "";
-		StringBuilder urlBuilder = new StringBuilder("http://211.237.50.150:7080/openapi/"); 
+		String result1 = "";
+		String result2 = "";
+		String result3 = "";
+		StringBuilder urlBuilder1 = new StringBuilder("http://211.237.50.150:7080/openapi/"); 
+		StringBuilder urlBuilder2 = new StringBuilder("http://211.237.50.150:7080/openapi/"); 
+		StringBuilder urlBuilder3 = new StringBuilder("http://211.237.50.150:7080/openapi/"); 
 		
 		// 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
 		
@@ -51,30 +60,152 @@ public class TempForTable {
 		 XPathExpression expr=null;
 		 NodeList nodeList =null;
 		//http://211.237.50.150:7080/openapi/eb16ab3bbff3de6855ec9a9df256d865a5214e03f4d8f3dff5af008c178445ab/xml/Grid_20150827000000000226_1/1/10
+		 
+		 
+		 
+		 
+
+		 //map 배열 사용
+		 //{레시피 번호:1,{내용$내용$....}}
+		 
+		 
+		 
+		 //1   %a% a  $  2 % b % b$...
+		 //이렇게 저장 후 $스플릿  
+		 //다시 %로 스플릿이후 인덱스(0)로 분류
+		 
+		 //한번에 넣을필요가 없네 
+		 //메뉴이름 , 재료 이름수량, 조리법으로 나눠받는다  
+		
+		 
+		 
+		 String menu="";
+		 String ingredient="";
+		 String cuisine="";
 		try {
 			//url에 요청인자 삽입
-			urlBuilder.append(URLEncoder.encode("eb16ab3bbff3de6855ec9a9df256d865a5214e03f4d8f3dff5af008c178445ab", "UTF-8"));//인증키
-			urlBuilder.append("/" + URLEncoder.encode("xml", "UTF-8"));
-//			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000226_1", "UTF-8")); /*레시피 기본정보*/
+			urlBuilder1.append(URLEncoder.encode("eb16ab3bbff3de6855ec9a9df256d865a5214e03f4d8f3dff5af008c178445ab", "UTF-8"));//인증키
+			urlBuilder1.append("/" + URLEncoder.encode("xml", "UTF-8"));
+			urlBuilder1.append("/" + URLEncoder.encode("Grid_20150827000000000226_1", "UTF-8")); /*레시피 기본정보*/
 //			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000227_1", "UTF-8")); /*레시피 재료정보*/
-			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000228_1", "UTF-8")); /*레시피 과정정보*/
-			urlBuilder.append("/" + URLEncoder.encode("1", "UTF-8") + "/" + URLEncoder.encode("100", "UTF-8")); /*레시피 기본정보*/
-			url = new URL(urlBuilder.toString());
+//			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000228_1", "UTF-8")); /*레시피 과정정보*/
+			urlBuilder1.append("/" + URLEncoder.encode("1", "UTF-8") + "/" + URLEncoder.encode("100", "UTF-8")); /*레시피 기본정보*/
+			url = new URL(urlBuilder1.toString());
 			urlconnection = (HttpURLConnection) url.openConnection();
 			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 			
 			while ((line = br.readLine()) != null) {
-				result = result + line.trim();// result = URL로 XML을 읽은 값
+				result1 = result1 + line.trim();// result = URL로 XML을 읽은 값
 			}
 		
-			is = new InputSource(new StringReader(result));
+			is = new InputSource(new StringReader(result1));
             builder = factory.newDocumentBuilder();
             doc = builder.parse(is);
             xpathFactory = XPathFactory.newInstance();
             xpath = xpathFactory.newXPath();
 			
-//            XPathExpression expr = xpath.compile("//Grid_20150827000000000226_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
-//            XPathExpression expr = xpath.compile("//Grid_20150827000000000227_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+          expr = xpath.compile("//Grid_20150827000000000226_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+//            expr = xpath.compile("//Grid_20150827000000000227_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+//            expr = xpath.compile("//Grid_20150827000000000228_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+            nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                NodeList child = nodeList.item(i).getChildNodes();
+                for (int j = 0; j < child.getLength(); j++) {	
+                    Node node = child.item(j);
+                    if(node.getTextContent()!="") {
+                    	
+                    	
+                    	
+                    	if("RECIPE_ID".equals(node.getNodeName())){
+                    		menu+= node.getTextContent()+"%";
+                    	}
+                    			
+                    			
+                    	if("RECIPE_NM_KO".equals(node.getNodeName()) ) {
+                    		
+                    		menu+= node.getTextContent()+"$";                    		
+                    	}
+
+                    }
+                }
+            }
+		System.out.println("--------------------------------------");
+          //url에 요청인자 삽입
+			urlBuilder2.append(URLEncoder.encode("eb16ab3bbff3de6855ec9a9df256d865a5214e03f4d8f3dff5af008c178445ab", "UTF-8"));//인증키
+			urlBuilder2.append("/" + URLEncoder.encode("xml", "UTF-8"));
+//			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000226_1", "UTF-8")); /*레시피 기본정보*/
+			urlBuilder2.append("/" + URLEncoder.encode("Grid_20150827000000000227_1", "UTF-8")); /*레시피 재료정보*/
+//			urlBuilder2.append("/" + URLEncoder.encode("Grid_20150827000000000228_1", "UTF-8")); /*레시피 과정정보*/
+			urlBuilder2.append("/" + URLEncoder.encode("1", "UTF-8") + "/" + URLEncoder.encode("100", "UTF-8")); /*레시피 기본정보*/
+			url = new URL(urlBuilder2.toString());
+			urlconnection = (HttpURLConnection) url.openConnection();
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+			
+			while ((line = br.readLine()) != null) {
+				result2 = result2 + line.trim();// result = URL로 XML을 읽은 값
+			}
+		
+			is = new InputSource(new StringReader(result2));
+            builder = factory.newDocumentBuilder();
+            doc = builder.parse(is);
+            xpathFactory = XPathFactory.newInstance();
+            xpath = xpathFactory.newXPath();
+			
+//          expr = xpath.compile("//Grid_20150827000000000226_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+            expr = xpath.compile("//Grid_20150827000000000227_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+//            expr = xpath.compile("//Grid_20150827000000000228_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+            nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                NodeList child = nodeList.item(i).getChildNodes();
+                for (int j = 0; j < child.getLength(); j++) {
+                    Node node = child.item(j);
+                    if(node.getTextContent()!="") {
+                    	
+                    	if("RECIPE_ID".equals(node.getNodeName())) {
+                    		
+                    		ingredient+= node.getTextContent()+"%";
+                    	}
+                    		
+                    		
+                    	if( "IRDNT_NM".equals(node.getNodeName())) {
+                    		ingredient+= node.getTextContent()+"%";
+            		
+                    	}
+                    	
+                    	if("IRDNT_CPCTY".equals(node.getNodeName()) ) {
+                    		ingredient+= node.getTextContent()+"$"; 
+                    	}
+
+                    }
+                }
+            }
+		
+            
+            System.out.println("--------------------------------------");
+            
+          //url에 요청인자 삽입
+			urlBuilder3.append(URLEncoder.encode("eb16ab3bbff3de6855ec9a9df256d865a5214e03f4d8f3dff5af008c178445ab", "UTF-8"));//인증키
+			urlBuilder3.append("/" + URLEncoder.encode("xml", "UTF-8"));
+//			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000226_1", "UTF-8")); /*레시피 기본정보*/
+//			urlBuilder.append("/" + URLEncoder.encode("Grid_20150827000000000227_1", "UTF-8")); /*레시피 재료정보*/
+			urlBuilder3.append("/" + URLEncoder.encode("Grid_20150827000000000228_1", "UTF-8")); /*레시피 과정정보*/
+			urlBuilder3.append("/" + URLEncoder.encode("1", "UTF-8") + "/" + URLEncoder.encode("100", "UTF-8")); /*레시피 기본정보*/
+			url = new URL(urlBuilder3.toString());
+			urlconnection = (HttpURLConnection) url.openConnection();
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+			
+			while ((line = br.readLine()) != null) {
+				result3 = result3 + line.trim();// result = URL로 XML을 읽은 값
+			}
+		
+			is = new InputSource(new StringReader(result3));
+            builder = factory.newDocumentBuilder();
+            doc = builder.parse(is);
+            xpathFactory = XPathFactory.newInstance();
+            xpath = xpathFactory.newXPath();
+			
+//          expr = xpath.compile("//Grid_20150827000000000226_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
+//            expr = xpath.compile("//Grid_20150827000000000227_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
             expr = xpath.compile("//Grid_20150827000000000228_1/row");//<Grid_20150827000000000226_1> 아래의 <row>의 값들을 읽음
             nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {
@@ -83,19 +214,21 @@ public class TempForTable {
                     Node node = child.item(j);
                     if(node.getTextContent()!="") {
                     	
-                    	System.out.println(node.getNodeName()+": "+node.getTextContent() );
-
+                    	if(node.getTextContent()!="") {
+                        	
+                        	if("RECIPE_ID".equals(node.getNodeName())){
+                        		cuisine+= node.getTextContent()+"%";
+                        	}
+                        			
+                        	if("COOKING_DC".equals(node.getNodeName()) ) {
+                        		
+                        		cuisine+= node.getTextContent()+"$";                    		
+                        	}
+                    	}
                     }
                 }
-            }
-		
             
-            
-            
-            
-            
-            
-            
+            }  
             
             
             
@@ -209,10 +342,66 @@ public class TempForTable {
 		
 		
 		
+//		
+//		System.out.println(menu);
+//		System.out.println();
+//		System.out.println(ingredient);
+//		System.out.println();
+//		System.out.println(cuisine);
+		//$로 크게 나누고 %로 다시 나눠서 index(0)으로 재료코드를 얻는다.
+		//
+		
+		//메뉴 
+		List<String> mn = new ArrayList<String>();
+		Map<String,String> m = new HashMap<String, String>();
+//		System.out.println(menu );
+//		System.out.println(Arrays.toString(menu.split("\\$")) );
+
+		mn.addAll(Arrays.asList(menu.split("\\$")));
+		for(String s : mn) {
+			m.put(s.split("%")[0], s.split("%")[1]);
+		}
+		System.out.println(m.get("1"));
+		System.out.println(m.get("2"));
+		System.out.println(m.get("3"));
+		System.out.println(m.get("4"));
+		System.out.println(m.get("5"));
+
+						
+		
+		//재료 
+		//map 안에 map 넣기 
 		
 		
 		
-		
+		//과정
+		List<String> csn = new ArrayList<String>();
+		Map<String,String> cs = new HashMap<String, String>();
+//		System.out.println(menu );
+//		System.out.println(Arrays.toString(menu.split("\\$")) );
+
+		csn.addAll(Arrays.asList(cuisine.split("\\$")));
+//		System.out.println(Arrays.toString(csn));
+		for(String s : csn) {
+			String allcsn="";
+			for(int i=1;i<s.split("%").length;i++) {
+				
+				allcsn+=s.split("%")[i]+" ";
+//				System.out.println(allcsn);
+			}
+//			System.out.println();
+			cs.put(s.split("%")[0],allcsn);
+		}
+		//뭔가 
+//		  for(Map.Entry<String, String> elem : cs.entrySet()){
+//			  
+//	            String key1 = elem.getKey();
+//	            String value = elem.getValue();
+//	 
+//	            System.out.println(key1+" : "+value);
+//	 
+//	        }
+
 		
 		return "temp";
 				
