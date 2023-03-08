@@ -103,12 +103,12 @@ select * from likeTable;
 
 --<<댓글 테이블>>--
 create table commentTable(
-        id number not null primary key
-      , userid VARCHAR2(20 char) not null
-      , postid number not null
-      , commentcontent VARCHAR2(4000) not null
-      , create_at date default sysdate not null
-      , updated_at date
+        CMTID number not null primary key
+      , USERID VARCHAR2(20 char) not null
+      , POSTID number not null
+      , COMMENTCONTENT VARCHAR2(4000) not null
+      , create_at TIMESTAMP default sysdate not null
+      , updated_at TIMESTAMP
       , constraint FK_userid_commentTable Foreign Key (userid) references usersTable (userid)
       , constraint FK_postid_commentTable Foreign Key (postid) references postTable (postid)
 );
