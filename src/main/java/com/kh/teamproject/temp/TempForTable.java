@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -361,16 +362,41 @@ public class TempForTable {
 		for(String s : mn) {
 			m.put(s.split("%")[0], s.split("%")[1]);
 		}
-		System.out.println(m.get("1"));
-		System.out.println(m.get("2"));
-		System.out.println(m.get("3"));
-		System.out.println(m.get("4"));
-		System.out.println(m.get("5"));
+		System.out.println(m);
 
 						
 		
 		//재료 
 		//map 안에 map 넣기 
+		
+
+//		System.out.println(Arrays.toString(ingredient.split("\\$")) );
+		List<String> ingList = new ArrayList<String>();
+		ingList.addAll(Arrays.asList(ingredient.split("\\$")));
+		
+		Map<String, LinkedHashMap<String, String>> ing = new HashMap<>();
+		
+		
+		for(int i =0; i<ingList.size();i++) {
+			String ingKey=ingList.get(i).split("%")[0];
+			String ingVal=ingList.get(i).split("%")[1];
+			String ingAmt=ingList.get(i).split("%")[2];
+			
+			
+			if(ing.get(ingKey)==null) {
+				LinkedHashMap<String, String> ig = new LinkedHashMap<String, String>();
+				ig.put(ingVal, ingAmt);		
+				ing.put(ingKey,ig );
+			}else {
+				ing.get(ingKey).put(ingVal, ingAmt);
+			}
+			
+			
+		}
+		
+		System.out.println(ing);
+		
+		
 		
 		
 		
@@ -378,29 +404,24 @@ public class TempForTable {
 		List<String> csn = new ArrayList<String>();
 		Map<String,String> cs = new HashMap<String, String>();
 //		System.out.println(menu );
-//		System.out.println(Arrays.toString(menu.split("\\$")) );
+//		System.out.println(Arrays.toString(cuisine.split("\\$")) );
 
 		csn.addAll(Arrays.asList(cuisine.split("\\$")));
-//		System.out.println(Arrays.toString(csn));
-		for(String s : csn) {
-			String allcsn="";
-			for(int i=1;i<s.split("%").length;i++) {
-				
-				allcsn+=s.split("%")[i]+" ";
-//				System.out.println(allcsn);
+		
+		for(int i =0; i<csn.size();i++) {
+			String csnKey=csn.get(i).split("%")[0];
+			String csnVal=csn.get(i).split("%")[1];			
+			if(cs.get(csnKey) != null) {
+				cs.put(csnKey, cs.get(csnKey)+"\n"+csnVal);
+			}else {
+				cs.put(csnKey, csnVal);			
 			}
-//			System.out.println();
-			cs.put(s.split("%")[0],allcsn);
+			
+			
 		}
-		//뭔가 
-//		  for(Map.Entry<String, String> elem : cs.entrySet()){
-//			  
-//	            String key1 = elem.getKey();
-//	            String value = elem.getValue();
-//	 
-//	            System.out.println(key1+" : "+value);
-//	 
-//	        }
+		
+		
+		System.out.println(cs);
 
 		
 		return "temp";
