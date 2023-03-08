@@ -44,7 +44,6 @@ update USERSTABLE set username='&name', USERNICKNAME='&nickname', EMAIL='&email'
 --게시글 테이블
 CREATE TABLE POSTTABLE(
        POSTID NUMBER PRIMARY KEY NOT NULL
-     , POSTNAME VARCHAR2(50 char) NOT NULL
      , userid VARCHAR2(20 char) NOT NULL                        
      , username VARCHAR2(20 char) NOT NULL			        
      , FOODNAME VARCHAR2(50 char) NOT NULL
@@ -65,7 +64,7 @@ CREATE TABLE POSTTABLE(
 CREATE TABLE INGTABLE(
      POSTID NUMBER
     , INGREDIENT VARCHAR2(30 char) NOT NULL
-    , AMT VARCHAR2(30 char)
+    , AMOUNT VARCHAR2(30 char)
     , CONSTRAINT FK_PID_ING FOREIGN KEY(POSTID) REFERENCES POSTTABLE(POSTID)
     , CONSTRAINT PK_ING PRIMARY KEY(POSTID, INGREDIENT)
 );
@@ -104,12 +103,12 @@ select * from likeTable;
 
 --<<댓글 테이블>>--
 create table commentTable(
-        id number not null primary key
-      , userid VARCHAR2(20 char) not null
-      , postid number not null
-      , commentcontent VARCHAR2(4000) not null
-      , create_at date default sysdate not null
-      , updated_at date
+        CMTID number not null primary key
+      , USERID VARCHAR2(20 char) not null
+      , POSTID number not null
+      , COMMENTCONTENT VARCHAR2(4000) not null
+      , create_at TIMESTAMP default sysdate not null
+      , updated_at TIMESTAMP
       , constraint FK_userid_commentTable Foreign Key (userid) references usersTable (userid)
       , constraint FK_postid_commentTable Foreign Key (postid) references postTable (postid)
 );
