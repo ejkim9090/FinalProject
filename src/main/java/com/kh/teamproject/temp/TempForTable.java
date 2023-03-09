@@ -75,7 +75,6 @@ public class TempForTable {
 		 //이렇게 저장 후 $스플릿  
 		 //다시 %로 스플릿이후 인덱스(0)로 분류
 		 
-		 //한번에 넣을필요가 없네 
 		 //메뉴이름 , 재료 이름수량, 조리법으로 나눠받는다  
 		
 		 
@@ -231,64 +230,7 @@ public class TempForTable {
             
             }  
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
